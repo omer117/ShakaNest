@@ -8,6 +8,8 @@ import { OrdersModule } from './orders/orders.module';
 import { DailyForecastModule } from './daily_forecast/daily_forecast.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BeachesModule } from './beaches/beaches.module';
+import { Beaches } from './beaches/entities/beaches.entity';
+import { DailyForecast } from './daily_forecast/entities/daily_forecast.entity';
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { BeachesModule } from './beaches/beaches.module';
       password: "a6d82f881d3080c17fcecf6b3df347a5e85fb41c0c5f287e22da58c0ea671876",
       database: "d3ioitbidtfoue",
       autoLoadEntities: true,
-      ssl:{
+      ssl: {
         rejectUnauthorized: false,
       }
 

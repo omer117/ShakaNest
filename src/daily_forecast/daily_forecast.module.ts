@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { DailyForecastService } from './daily_forecast.service';
 import { DailyForecastController } from './daily_forecast.controller';
