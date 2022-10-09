@@ -12,20 +12,14 @@ export class DailyForecastController {
     return this.dailyForecastService.create(createDailyForecastDto);
   }
 
-  @Get()
-  findAll() {
-    return this.dailyForecastService.findAll();
-  }
+  
+
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dailyForecastService.findOne(+id);
+  findOne(@Param('id') beach_id: number) {
+    return this.dailyForecastService.getForecastByBeachId(beach_id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDailyForecastDto: UpdateDailyForecastDto) {
-    return this.dailyForecastService.update(+id, updateDailyForecastDto);
-  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
