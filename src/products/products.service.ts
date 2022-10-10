@@ -1,26 +1,42 @@
-import { Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { Injectable, Logger } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateProductsDto } from './dto/create-Product.dto';
+import { UpdateProductsDto } from './dto/update-Product.dto';
+import { Products } from './entities/Product.entity';
+import { ProductRepository } from './Products.repo';
 
 @Injectable()
 export class ProductsService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  @InjectRepository(Products)
+  private productRepository: ProductRepository;
+
+
+  create(createProductDto: CreateProductsDto) {
+    return 'This action adds a new Product';
   }
 
   findAll() {
-    return `This action returns all products`;
+    return this.productRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findByCatagory(catagory: any) {
+    Logger.log(catagory.catagory)
+    const result = await
+          this.productRepository.createQueryBuilder()
+          .where('catagory = :catagory', {catagory: catagory.catagory})
+          .getRawMany()    
+          return result;
+
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  findOneById(id: number) {
+  }
+
+  update(id: number, updateProductDto: UpdateProductsDto) {
+    return `This action updates a #${id} Product`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} product`;
+    return `This action removes a #${id} Product`;
   }
 }

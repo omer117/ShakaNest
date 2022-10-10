@@ -11,6 +11,11 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto);
   }
 
+  @Delete()
+  deleteAll(){
+    return this.ordersService.deleteAll();
+  }
+
   @Get()
   findAll() {
     return this.ordersService.findAll();

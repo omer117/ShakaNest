@@ -12,17 +12,14 @@ export class DailyForecastController {
     return this.dailyForecastService.create(createDailyForecastDto);
   }
 
-  
-
-
   @Get(':id')
-  findOne(@Param('id') beach_id: number) {
+  findOneById(@Param('id') beach_id: number) {
     return this.dailyForecastService.getForecastByBeachId(beach_id);
   }
-
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.dailyForecastService.remove(+id);
   }
+
 }

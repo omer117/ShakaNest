@@ -23,7 +23,9 @@ export class OrdersService {
     return order;
   }
 
-
+  async deleteAll(){
+    return await this.orderRepository.createQueryBuilder().delete().from(orders).execute()
+  }
 
   findAll() {
     return `This action returns all orders`;
