@@ -11,12 +11,10 @@ export class OrdersService {
     private orderRepository: orderRepository
   ) { }
 
-  async create(createOrderDto: CreateOrderDto) {
+  async create(createOrderDto: CreateOrderDto):Promise<orders> {
     const { items_purchased, purchase_date, user_id } = createOrderDto
     const order = this.orderRepository.create({
-      items_purchased,
-      purchase_date,
-      user_id,
+      items_purchased, purchase_date,user_id
     })
 
     await this.orderRepository.save(order)

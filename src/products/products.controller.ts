@@ -17,26 +17,29 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
+  @Post('/getCatagoryFilteredByPrice')
+  findByCatagoryFilter(@Body() req: any) {
+    return this.productsService.findByCatagoryFilter(req);
+  }
+
   @Post('/getCatagory')
   findByCatagory(@Body() catagory: string) {
     return this.productsService.findByCatagory(catagory);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productsService.findOneById(+id);
+  @Post('/getById')
+  findByCatagoryAndId(@Body()id : any) {
+    return this.productsService.findOneById(id);
   }
 
-  @Post('/getSingleProduct')
-  
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductsDto) {
-    return this.productsService.update(+id, updateProductDto);
+  update(@Param('id') product_id: number, @Body() req: Object) {
+    return this.productsService.update(product_id,req);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(+id);
+  remove(@Param('id') product_id: number) {
+    return this.productsService.remove(product_id);
   }
 }
