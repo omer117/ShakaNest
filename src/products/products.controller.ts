@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ProductsService } from './Products.service';
 import { CreateProductsDto } from './dto/create-Product.dto';
 import { UpdateProductsDto } from './dto/update-Product.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('Products')
 export class ProductsController {
@@ -22,14 +23,19 @@ export class ProductsController {
     return this.productsService.findByCatagoryFilter(req);
   }
 
+  @Post('/youMayLike')
+  youMayLike(@Body() req: string) {
+    return this.productsService.youMayLike(req);
+  }
+
   @Post('/getCatagory')
   findByCatagory(@Body() catagory: string) {
     return this.productsService.findByCatagory(catagory);
   }
 
-  @Post('/getById')
-  findByCatagoryAndId(@Body()id : any) {
-    return this.productsService.findOneById(id);
+  @Get(':id')
+  findByCatagoryAndId(@Param('id') product_id: number, @Body() _catagory: string) {
+    return this.productsService.findOneById(product_id);
   }
 
 

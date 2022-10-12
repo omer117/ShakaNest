@@ -13,7 +13,7 @@ export class ProductsService {
   private productRepository: ProductRepository;
 
 
-  async create(createProductDto: CreateProductsDto) {
+  async create(createProductDto: CreateProductsDto):Promise<Products> {
     const { catagory, title, price, info, sizes, image } = createProductDto
     const Product = this.productRepository.create({
       catagory, title, price, info, sizes, image
@@ -23,7 +23,7 @@ export class ProductsService {
     return Product
   }
 
-  findAll() {
+  findAll(): Promise<Products[]> {
     return this.productRepository.find();
   }
 
@@ -31,6 +31,7 @@ export class ProductsService {
 
   async findByCatagoryFilter(req: any) {
     let priceFilter: Filter = req.filter
+    Logger.log(req)
     const result = await
       this.productRepository.createQueryBuilder()
         .where('catagory = :catagory', { catagory: req.catagory })
@@ -39,35 +40,40 @@ export class ProductsService {
     return result;
   }
 
-  async findByCatagory(catagory: any) {
-    Logger.log(catagory.catagory)
+  async findByCatagory(req: any): Promise<Products[]> {
     const result = await
       this.productRepository.createQueryBuilder()
-        .where('catagory = :catagory', { catagory: catagory.catagory })
+        .where('catagory = :catagory', { catagory: req.catagory })
         .getRawMany()
     return result;
   }
 
+  async youMayLike(req): Promise<Products[]> {
+    const result = await
+      this.productRepository.createQueryBuilder()
+        .where('catagory = :catagory', { catagory: req.catagory })
+        .orderBy({ "price": 'DESC' })
+        .limit(3)
+        .getRawMany()
+
+    return result
+  }
 
   async findOneById(product_id: any) {
-    Logger.log(product_id.product_id)
-    const realProductId: any = product_id.product_id
-    const found = await this.productRepository.findOne({ where: { product_id: realProductId } })
+    Logger.log(product_id)
+    const found = await this.productRepository.findOne({ where: { product_id } })
     return found
   }
 
 
 
   async update(product_id: number, req: any) {
-    Logger.log(product_id)
-    Logger.log(req)
-      
-    
+
     const { catagory, title, price, info, sizes, image } = req
     const Product =
-    this.productRepository.create({
-      catagory, title, price, info, sizes, image
-    })
+      this.productRepository.create({
+        catagory, title, price, info, sizes, image
+      })
 
     this.productRepository.delete(product_id)
     await this.productRepository.save(Product)

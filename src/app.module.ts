@@ -1,19 +1,16 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { ProductsModule } from './Products/Products.module';
 import { OrdersModule } from './orders/orders.module';
 import { DailyForecastModule } from './daily_forecast/daily_forecast.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BeachesModule } from './beaches/beaches.module';
-import { Beaches } from './beaches/entities/beaches.entity';
-import { DailyForecast } from './daily_forecast/entities/daily_forecast.entity';
+import { AuthModule } from './auth/auth.module';
+import { JwtStrategy } from './auth/jwt/jwt.strategy';
 
 @Module({
   imports: [
-    UsersModule,
     ProductsModule,
     OrdersModule,
     DailyForecastModule,
@@ -31,7 +28,8 @@ import { DailyForecast } from './daily_forecast/entities/daily_forecast.entity';
       }
 
     }),
-    BeachesModule
+    BeachesModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

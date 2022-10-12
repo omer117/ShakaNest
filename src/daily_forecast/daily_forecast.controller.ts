@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { DailyForecastService } from './daily_forecast.service';
 import { CreateDailyForecastDto } from './dto/create-daily_forecast.dto';
-import { UpdateDailyForecastDto } from './dto/update-daily_forecast.dto';
 
 @Controller('daily-forecast')
 export class DailyForecastController {
