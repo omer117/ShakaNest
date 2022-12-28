@@ -15,13 +15,13 @@ import { JwtStrategy } from './auth/jwt/jwt.strategy';
     OrdersModule,
     DailyForecastModule,
     TypeOrmModule.forRoot({
-      url: process.env.DATABASE_URL,
+      url: 'postgres://shakabaka_user:mYJUqMNWB0vvWyFwPLFwhkudsn96fE6N@dpg-cdbrlcpgp3jvds00f7l0-a.singapore-postgres.render.com/shakabaka',
       type: 'postgres',
-      host: 'ec2-54-173-237-110.compute-1.amazonaws.com',
+      host: 'dpg-cdbrlcpgp3jvds00f7l0-a',
       port: 5432,
-      username: "mswwvgtkcedutn",
-      password: "a6d82f881d3080c17fcecf6b3df347a5e85fb41c0c5f287e22da58c0ea671876",
-      database: "d3ioitbidtfoue",
+      username: "shakabaka_user",
+      password: "mYJUqMNWB0vvWyFwPLFwhkudsn96fE6N",
+      database: "shakabaka",
       autoLoadEntities: true,
       ssl: {
         rejectUnauthorized: false,
